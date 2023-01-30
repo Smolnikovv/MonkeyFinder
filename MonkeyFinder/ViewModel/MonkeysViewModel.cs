@@ -9,6 +9,17 @@ namespace MonkeyFinder.ViewModel
         public MonkeysViewModel(MonkeyService monkeyService) 
         {
             Title = "Monkey Finder";
+            this.monkeyService = monkeyService;
+        }
+        [RelayCommand]
+        async Task GoToDetailsAsync(Monkey monkey)
+        {
+            if (monkey is null)
+                return;
+            await Shell.Current.GoToAsync($"{nameof(DetailPage)}", true, new Dictionary<string, object>
+            {
+                {"Monkey", monkey }
+            });
         }
         [RelayCommand]
         async Task GetMonkeyAsync()
