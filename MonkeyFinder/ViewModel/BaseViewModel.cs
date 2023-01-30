@@ -1,4 +1,3 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
 namespace MonkeyFinder.ViewModel
 {
     public partial class BaseViewModel : ObservableObject
