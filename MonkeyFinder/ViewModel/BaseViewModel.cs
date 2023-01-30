@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 namespace MonkeyFinder.ViewModel
 {
-    internal class BaseViewModel
+    public partial class BaseViewModel : ObservableObject
     {
+        public BaseViewModel() 
+        {
+
+        }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
+        bool _isBusy;
+        [ObservableProperty]
+        string _title;
+        public bool IsNotBusy => !IsBusy;
     }
 }
