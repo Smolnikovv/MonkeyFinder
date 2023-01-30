@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MonkeyFinder.Model"
              x:Class="MonkeyFinder.View.MainPage"
-             Title="MainPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Monkey Finder">
+    <CollectionView>
+        <CollectionView.ItemsSource>
+            <x:Array Type="{x:Type model:Monkey}">
+                <model:Monkey 
+                    Name="Baboon"
+                    Location="Africa"
+                    Image="https://cdn.mos.cms.futurecdn.net/5VRpoZoyUuepUJi5kFTzmC-1200-80.jpg"
+                    Population="10000"/>
+                <model:Monkey 
+                    Name="Capuchin Monkey"
+                    Location="America"
+                    Image="https://dziendobry.tvn.pl/cdn-zdjecie-fraxxm-fot-jamestung-gettyimagescom-5235124/alternates/SQUARE_1280"/>
+                <model:Monkey 
+                    Name="Gorilla"
+                    Location="Somwhere"
+                    Image="https://fajnepodroze.pl/wp-content/uploads/2020/03/goryl.jpg"/>
+            </x:Array>
+        </CollectionView.ItemsSource>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="model:Monkey">
+                <HorizontalStackLayout Padding="10"
+                                       Spacing="10">
+                    <Image Source="{Binding Image}"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           Aspect="AspectFill"/>
+                    <VerticalStackLayout Padding="10" Spacing="5" VerticalOptions="End">
+                        <Label Text="{Binding Name}" FontSize="24"/>
+                        <Label Text="{Binding Location}" FontSize="12"/>
+                        <Label Text="{Binding Population}" FontSize="12"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>
