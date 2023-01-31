@@ -47,11 +47,21 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
+        
         <Button Text="Get Monkeys"
                 Grid.Row="1"
                 Margin="8"
                 Command="{Binding GetMonkeyCommand}"
                 IsEnabled="{Binding IsNotBusy}"/>
+
+        <Button Text="Find Monkey"
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="8"
+                Command="{Binding GetClosestMonkeyCommand}"
+                IsEnabled="{Binding IsNotBusy}"/>
+
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                            IsRunning="{Binding IsBusy}"
                            HorizontalOptions="CenterAndExpand"
