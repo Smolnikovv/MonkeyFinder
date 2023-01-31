@@ -20,6 +20,7 @@ namespace MonkeyFinder.ViewModel
             {
                 {"Monkey", monkey }
             });
+
         }
         [RelayCommand]
         async Task GetMonkeyAsync()
@@ -44,7 +45,7 @@ namespace MonkeyFinder.ViewModel
             catch(Exception ex)
             {
                 Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error", "Something went wrong", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Something went wrong {ex.Message}", "OK");
             }
             finally
             {

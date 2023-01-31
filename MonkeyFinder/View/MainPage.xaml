@@ -19,11 +19,13 @@
                     <Grid Padding="10">
                         <Frame HeightRequest="125"
                                Padding="0">
+
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="2"
                                                       CommandParameter="{Binding .}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"/>
                             </Frame.GestureRecognizers>
+
                             <Grid Padding="0"
                                   ColumnDefinitions="125,*">
                                 <Image Aspect="AspectFill"
@@ -44,7 +46,6 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
         <Button Text="Get Monkeys"
                 Grid.Row="1"
