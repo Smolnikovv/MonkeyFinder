@@ -10,57 +10,82 @@
           ColumnSpacing="5"
           RowDefinitions="*,Auto"
           RowSpacing="0">
-        <CollectionView BackgroundColor="Transparent"
-                        Grid.ColumnSpan="2"
+        <RefreshView Grid.ColumnSpan="2"
+                     Command="{Binding GetMonkeyCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView
                         ItemsSource="{Binding Monkeys}"
                         SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Monkey">
-                    <Grid Padding="10">
-                        <Frame HeightRequest="125"
-                               Padding="0">
+                <!--<CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="3">
+                        
+                    </GridItemsLayout>
+                </CollectionView.ItemsLayout>-->
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 WidthRequest="200"
+                                 HeightRequest="200">
+                        <Image Source="https://cdn.dribbble.com/users/5187354/screenshots/14032905/no_data_found_4x.jpg"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Aspect="AspectFill"/>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="2"
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Monkey">
+                        <Grid Padding="10">
+                            <Frame Style="{StaticResource CardView}" 
+                                HeightRequest="125"
+                                Padding="0">
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2"
                                                       CommandParameter="{Binding .}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"/>
-                            </Frame.GestureRecognizers>
+                                </Frame.GestureRecognizers>
 
-                            <Grid Padding="0"
+                                <Grid Padding="0"
                                   ColumnDefinitions="125,*">
-                                <Image Aspect="AspectFill"
+                                    <Image Aspect="AspectFill"
                                         Source="{Binding Image}"
                                         WidthRequest="125"
                                         HeightRequest="125"/>
-                                <VerticalStackLayout Grid.Column="1"
+                                    <VerticalStackLayout Grid.Column="1"
                                                      Padding="10"
                                                      VerticalOptions="Center">
-                                    <Label Text="{Binding Name}"
-                                           FontSize="20"/>
-                                    <Label Text="{Binding Location}"
-                                           FontSize="12"/>
+                                        <Label Text="{Binding Name}"
+                                           Style="{StaticResource MediumLabel}"/>
+                                        <Label Text="{Binding Location}"
+                                           Style="{StaticResource SmallLabel}"/>
 
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
         
         
         <Button Text="Get Monkeys"
                 Grid.Row="1"
                 Margin="8"
                 Command="{Binding GetMonkeyCommand}"
-                IsEnabled="{Binding IsNotBusy}"/>
+                IsEnabled="{Binding IsNotBusy}"
+                Style="{StaticResource ButtonOutline}"/>
 
         <Button Text="Find Monkey"
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="8"
                 Command="{Binding GetClosestMonkeyCommand}"
-                IsEnabled="{Binding IsNotBusy}"/>
+                IsEnabled="{Binding IsNotBusy}"
+                Style="{StaticResource ButtonOutline}"/>
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                            IsRunning="{Binding IsBusy}"
